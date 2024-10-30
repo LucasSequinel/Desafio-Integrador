@@ -1,0 +1,144 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+.home-butao{
+    text-align: left;
+}
+
+/* Navbar */
+nav {
+    background-color: #00AEB9;
+    
+    padding: 12px;
+}
+
+nav ul {
+    
+    list-style: none;
+    display: flex;
+    justify-content: right;
+    gap: 15px;
+}
+
+
+nav a {
+    text-decoration: none;
+    color:white;
+}
+nav a:hover{
+    color: yellow;
+}
+.nav-link-ative{
+    color:#037780
+}
+button{
+    border-width: 1px;
+    border-radius: 6px;
+    padding: 5px 12px;
+}
+
+.butao{
+    background-color: #037780;
+}
+
+
+
+/* Hero Section */
+.hero-section {
+    background-color:rgb(238, 238, 238);
+    padding: 10px;
+    text-align: center;
+}
+
+.hero-section h1 {
+    color: #00AEB9;
+    font-size: 5rem;
+    
+}
+
+.hero-section p {
+    font-size: 1.5rem;
+    color: #555;
+}
+
+
+/* Memorial Section */
+.container {
+    width: 85%;
+    max-width: 1200px;
+    margin: 30px auto;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 15%;
+}
+
+.col {
+    width: 48%;
+}
+
+.memorial-section h3 {
+    color: #00AEB9;
+    font-size: 3rem;
+}
+
+.memorial-section p {
+    color: #555;
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+}
+
+
+/* Image Placeholder */
+.img-placeholder {
+    background-color: #f0f0f0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-placeholder img {
+    max-width: 100%;
+    height: auto;
+}
+
+
+/* Footer */
+.footer {
+    margin-top: 5%;
+    background-color: #00AEB9;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+.footer p {
+    text-align: center;
+    margin: 5px 0;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .col {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
