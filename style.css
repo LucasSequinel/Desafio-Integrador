@@ -17,15 +17,15 @@ body {
 nav {
     background-color: #00AEB9;
     
-    padding: 12px;
+    padding: 15px;
 }
 
 nav ul {
-    
+    font-size: larger;
     list-style: none;
     display: flex;
-    justify-content: right;
-    gap: 15px;
+    justify-content: end;
+    gap: 20px;
 }
 
 
@@ -49,6 +49,9 @@ button{
     background-color: #037780;
 }
 
+section{
+    margin-top: 40px;
+}
 
 
 /* Hero Section */
@@ -118,7 +121,7 @@ button{
 
 /* Footer */
 .footer {
-    margin-top: 5%;
+    margin-top: 70px;
     background-color: #00AEB9;
     color: white;
     padding: 4px;
@@ -138,6 +141,7 @@ button{
     align-items: start;
     margin-top: 0px;
     padding-top: 0px;
+    margin-left: 700px;
 
 }
 .list-item{
@@ -145,11 +149,12 @@ button{
     border-style: solid;
     border-color: #35be47;
     border-radius: 10px;
+    justify-content: start;
     padding: 10px;
     margin: 10px;
 }
 .titulo{
-    margin-left: 30px;
+    margin-left: 720px;
     font-size: xx-large;
     align-items: center;
     justify-content: center;
@@ -171,5 +176,8 @@ button:hover{
     nav ul {
         flex-direction: row;
         gap: 10px;
+    }
+    .requests{
+        margin-left: 10px;
     }
 }
