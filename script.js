@@ -14,28 +14,16 @@ async function listarProfessores() {
         professoresContainer.innerHTML = '';
 
         professores.forEach(professor => {
-
-            // Lucas: fazer o HTML da listagem dos professores.
-
-
-            /*
-            Relacao de dados Professores:
-            {
-                nome: 'Prof. Ana Costa',
-                id: 1,
-                descricao: 'Professora de Programação'
-            }
-            */
             const listItem = document.createElement('div');
             listItem.className = 'list-item';
             listItem.innerHTML = ` 
                 ${professor.nome},
              ${professor.descricao} 
-             <button>remover</button>
+             <button class= "remover" data-id="${professor.id}" data-type="Professor">remover</button>
              <button>editar</button>
             `;
             professoresContainer.appendChild(listItem);
-        
+
         });
     } catch (error) {
         console.error('Erro ao listar professores:', error);
@@ -56,30 +44,16 @@ async function listarAtividades() {
         atividadesContainer.innerHTML = '';
 
         atividades.forEach(atividade => {
-
-            // Lucas: fazer o HTML da listagem dos alunos.
-
-
-            /*
-            Relacao de dados Alunos:
-            {
-                id: 1,
-                titulo: 'Atividade 1',
-                descricao: 'Descrição da atividade 1',
-                data: '2024-11-13',
-                tipo: 1
-            }
-            */
             const listItem = document.createElement('div');
             listItem.className = 'list-item';
             listItem.innerHTML = `
                 ${atividade.titulo},
                 ${atividade.descricao} 
-                <button>remover</button>
+                <button class= "remover" data-id="${atividade.id}" data-type="Atividade">remover</button>
                 <button>editar</button>
             `;
             atividadesContainer.appendChild(listItem);
-        
+
         });
     } catch (error) {
         console.error('Erro ao listar atividades:', error);
@@ -100,23 +74,6 @@ async function listarAlunos() {
         alunosContainer.innerHTML = '';
 
         alunos.forEach(aluno => {
-
-            // Lucas: fazer o HTML da listagem dos alunos.
-
-
-            /*
-            Relacao de dados Alunos:
-            {
-            usuario: 'jose.silva',
-            senha: 'senha123',
-            nome: 'José Silva',
-            id: 1,
-            email: 'jose@email.com',
-            data_nascimento: '1990-03-15',
-            descricao: 'Aluno de TI'
-            }
-            */
-
             const listItem = document.createElement('div');
             listItem.className = 'list-item';
             listItem.innerHTML = `
@@ -124,8 +81,8 @@ async function listarAlunos() {
                 Email: ${aluno.email} //
                 Nasc: ${aluno.data_nascimento} //
                  ${aluno.descricao}
-                 <button>remover</button>
-                <button>editar</button> 
+                 <button class= "remover" data-id="${aluno.id}" data-type="Aluno">remover</button>
+                 <button>editar</button> 
 
                
             `;
@@ -140,7 +97,7 @@ async function listarCursos() {
     try {
         const response = await fetch('http://localhost:3000/api/cursos');
         const cursos = await response.json();
-           
+
         console.log(`
             Cursos:\n
             ${cursos}
@@ -150,25 +107,12 @@ async function listarCursos() {
         cursosContainer.innerHTML = '';
 
         cursos.forEach(curso => {
-
-            // Lucas: fazer o HTML da listagem dos cursos.
-
-
-            /*
-            Relacao de dados Cursos:
-            { 
-                id: 1, 
-                total_periodos: 8, 
-                nome: 'Ciência da Computação'
-            }
-            */
-
             const listItem = document.createElement('div');
             listItem.className = 'list-item';
             listItem.innerHTML = `
                 Nome:${curso.nome} //
                 Períodos:${curso.total_periodos} 
-                <button>remover</button>
+                <button class= "remover" data-id="${curso.id}" data-type="Curso">remover</button>
                 <button>editar</button>
             `;
             cursosContainer.appendChild(listItem);
@@ -217,13 +161,13 @@ function updateForm() {
 }
 
 if (urlPage.includes("form"))
-    document.getElementById("dynamicForm").addEventListener("submit", function(event) {
+    document.getElementById("dynamicForm").addEventListener("submit", function (event) {
         event.preventDefault(); // Evita o envio do formulário padrão
 
         var inputs = document.querySelectorAll("#formFields input");
         var allFilled = true;
 
-        inputs.forEach(function(input) {
+        inputs.forEach(function (input) {
             if (!input.value) {
                 allFilled = false;
             }
@@ -249,18 +193,51 @@ if (urlPage.includes("form"))
                 },
                 body: json
             })
-            .then(response => response.json())
-            .then(data => {
-                console.log("Sucesso:", data);
-            })
-            .catch(error => {
-                console.error("Erro:", error);
-            });
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Sucesso:", data);
+                })
+                .catch(error => {
+                    console.error("Erro:", error);
+                });
         }
     });
 
+async function removerItem(id, type) {
+    try {
+        const response = await fetch(`http://localhost:3000/api/delete`,
+            {
+                method: 'DELETE',
+                headers: { 
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "tipo": type,
+                    "id": id
+                })
+            });
 
-///////////////////////
+        const result = await response.json();
+        console.log('Item removido:', result);
+
+        switch (type) {
+            case 'professor':
+                listarProfessores();
+                break;
+            case 'atividade':
+                listarAtividades();
+                break;
+            case 'aluno':
+                listarAlunos();
+                break;
+            case 'curso':
+                listarCursos();
+                break;
+        }
+    } catch (error) {
+        console.error('Erro ao remover item:', error);
+    }
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     const url = window.location.href;
@@ -277,4 +254,15 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         console.log("Nada a listar!");
     }
+
+    setTimeout(()=>{
+        document.querySelectorAll('.remover').forEach(button => { 
+            button.addEventListener('click', event => {
+                console.log("click")
+                const id = event.target.getAttribute('data-id'); 
+                const type = event.target.getAttribute('data-type'); 
+                removerItem(id, type);
+            }); 
+        });
+    }, 2000)
 });
