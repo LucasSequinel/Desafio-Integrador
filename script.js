@@ -24,6 +24,16 @@ async function listarProfessores() {
                 descricao: 'Professora de Programação'
             }
             */
+            const listItem = document.createElement('div');
+            listItem.className = 'list-item';
+            listItem.innerHTML = ` 
+                ${professor.nome},
+             ${professor.descricao} 
+             <button>remover</button>
+             <button>editar</button>
+            `;
+            professoresContainer.appendChild(listItem);
+        
         });
     } catch (error) {
         console.error('Erro ao listar professores:', error);
@@ -58,6 +68,16 @@ async function listarAtividades() {
                 tipo: 1
             }
             */
+            const listItem = document.createElement('div');
+            listItem.className = 'list-item';
+            listItem.innerHTML = `
+                ${atividade.titulo},
+                ${atividade.descricao} 
+                <button>remover</button>
+                <button>editar</button>
+            `;
+            atividadesContainer.appendChild(listItem);
+        
         });
     } catch (error) {
         console.error('Erro ao listar atividades:', error);
@@ -95,16 +115,19 @@ async function listarAlunos() {
             }
             */
 
-            const alunoItem = document.createElement('div');
-            alunoItem.className = 'aluno-item';
-            alunoItem.innerHTML = `
-                <strong>Nome:</strong> ${aluno.nome} <br>
-                <strong>Email:</strong> ${aluno.email} <br>
-                <strong>Data de Nascimento:</strong> ${aluno.data_nascimento} <br>
-                <strong>Descrição:</strong> ${aluno.descricao} <br>
-                <hr>
+            const listItem = document.createElement('div');
+            listItem.className = 'list-item';
+            listItem.innerHTML = `
+                Nome: ${aluno.nome} //
+                Email: ${aluno.email} //
+                Nasc: ${aluno.data_nascimento} //
+                 ${aluno.descricao}
+                 <button>remover</button>
+                <button>editar</button> 
+
+               
             `;
-            alunosContainer.appendChild(alunoItem);
+            alunosContainer.appendChild(listItem);
         });
     } catch (error) {
         console.error('Erro ao listar alunos:', error);
@@ -138,14 +161,15 @@ async function listarCursos() {
             }
             */
 
-            const cursoItem = document.createElement('div');
-            cursoItem.className = 'curso-item';
-            cursoItem.innerHTML = `
-                <strong>Nome do Curso:</strong> ${curso.nome} <br>
-                <strong>Total de Períodos:</strong> ${curso.total_periodos} <br>
-                <hr>
+            const listItem = document.createElement('div');
+            listItem.className = 'list-item';
+            listItem.innerHTML = `
+                Nome:${curso.nome} //
+                Períodos:${curso.total_periodos} 
+                <button>remover</button>
+                <button>editar</button>
             `;
-            cursosContainer.appendChild(cursoItem);
+            cursosContainer.appendChild(listItem);
         });
     } catch (error) {
         console.error('Erro ao listar cursos:', error);
