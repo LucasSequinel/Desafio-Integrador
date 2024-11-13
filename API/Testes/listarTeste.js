@@ -1,6 +1,6 @@
 const sqlite3 = require('sqlite3').verbose();
 
-let db = new sqlite3.Database('../database/banco.sqlite', (err) => {
+let db = new sqlite3.Database('./database/banco.sqlite', (err) => {
     if (err) {
         console.error('Erro ao conectar ao banco de dados:', err.message);
     } else {

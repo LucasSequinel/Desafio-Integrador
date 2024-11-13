@@ -3,6 +3,11 @@ async function listarAlunos() {
         const response = await fetch('http://localhost:3000/api/alunos');
         const alunos = await response.json();
 
+        console.log(`
+            Alunos:\n
+            ${alunos}
+        `)
+
         const alunosContainer = document.getElementById('alunosContainer');
         alunosContainer.innerHTML = '';
 
@@ -27,7 +32,12 @@ async function listarCursos() {
     try {
         const response = await fetch('http://localhost:3000/api/cursos');
         const cursos = await response.json();
-                
+           
+        console.log(`
+            Cursos:\n
+            ${cursos}
+        `)
+
         const cursosContainer = document.getElementById('cursosContainer');
         cursosContainer.innerHTML = '';
 
