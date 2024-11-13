@@ -24,7 +24,7 @@ app.get('/api/atividades', atividadesController.listarAtividades);
 app.get('/api/professores', professoresController.listarProfessores);
 
 // Endpoint POST
-app.post('/form', insertController.adicionarDados);
+app.post('/api/form', insertController.adicionarDados);
 
 // Endpoint DELETE
 app.delete('/api/delete', deleteController.removerItem);
