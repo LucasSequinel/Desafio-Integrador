@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário Dinâmico</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <ul>          
+            <a class="home-butao" href="index.html">Home</a>
+            <li><a href="cursos.html" class="nav-link-ative">Cursos</a></li>
+            <li><a href="atividades.html">Atividades</a></li>
+            <li><a href="professores.html">Professores</a></li>
+            <li><a href="alunos.html">Alunos</a></li>
+            <li><a href="login.html"><button>Sign in</button></a></li>
+            <li><a href="registro.html"><button class="butao">Register</button></a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h2>Adicionar</h2>
+        <form id="dynamicForm">
+            <label for="selection">Escolha uma opção:</label>
+            <select id="selection" onchange="updateForm()">
+                <option value="">Selecione...</option>
+                <option value="curso">Curso</option>
+                <option value="professor">Professor</option>
+                <option value="atividade">Atividade</option>
+            </select>
+
+            <div id="formFields"></div>
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+
+    <div class="footer">
+        <p>(42) 3132-6600<br>Rua José Freitas dos Santos, 707, Engenheiro Gutierrez, Irati (PR)<br>CEP: 84500-550<br></p>
+        <p>UB - CAMPO REAL EDUCACIONAL S.A.<br>CNPJ: 03.281.761/0002-19<br>Todos os direitos reservados</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
