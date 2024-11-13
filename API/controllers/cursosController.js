@@ -1,7 +1,7 @@
 const db = require('../database');
 
 exports.listarCursos = (req, res) => {
-    const query = "SELECT id, nome, total_periodos FROM Curso";
+    const query = "SELECT * FROM Curso";
     
     db.all(query, [], (err, rows) => {
         if (err) {

@@ -1,7 +1,7 @@
 const db = require('../database');
 
 exports.listarAlunos = (req, res) => {
-    const query = "SELECT id, nome, email, data_nascimento, descricao FROM Aluno";
+    const query = "SELECT * FROM Aluno";
     
     db.all(query, [], (err, rows) => {
         if (err) {
