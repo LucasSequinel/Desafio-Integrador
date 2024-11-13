@@ -1,3 +1,5 @@
+const urlPage = window.location.href;
+
 async function listarProfessores() {
     try {
         const response = await fetch('http://localhost:3000/api/professores');
@@ -160,7 +162,7 @@ function updateForm() {
 
     formFields.innerHTML = "";
 
-    if (selection === "curso") {
+    if (selection === "Curso") {
         formFields.innerHTML = `
             <label for="courseName">Nome do Curso:</label>
             <input type="text" id="courseName" name="courseName" required>
@@ -168,7 +170,7 @@ function updateForm() {
             <label for="courseDuration">Duração do Curso:</label>
             <input type="text" id="courseDuration" name="courseDuration" required>
         `;
-    } else if (selection === "professor") {
+    } else if (selection === "Professor") {
         formFields.innerHTML = `
             <label for="teacherName">Nome do Professor:</label>
             <input type="text" id="teacherName" name="teacherName" required>
@@ -176,7 +178,7 @@ function updateForm() {
             <label for="teacherDesc">Descrição do Professor:</label>
             <input type="text" id="teacherDesc" name="teacherDesc" required>
         `;
-    } else if (selection === "atividade") {
+    } else if (selection === "Atividade") {
         formFields.innerHTML = `
             <label for="activityTitle">Título:</label>
             <input type="text" id="activityTitle" name="activityTitle" required>
@@ -190,47 +192,48 @@ function updateForm() {
     }
 }
 
-document.getElementById("dynamicForm").addEventListener("submit", function(event) {
-    event.preventDefault(); // Evita o envio do formulário padrão
+if (urlPage.includes("form"))
+    document.getElementById("dynamicForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Evita o envio do formulário padrão
 
-    var inputs = document.querySelectorAll("#formFields input");
-    var allFilled = true;
+        var inputs = document.querySelectorAll("#formFields input");
+        var allFilled = true;
 
-    inputs.forEach(function(input) {
-        if (!input.value) {
-            allFilled = false;
+        inputs.forEach(function(input) {
+            if (!input.value) {
+                allFilled = false;
+            }
+        });
+
+        if (!allFilled) {
+            alert("Por favor, preencha todos os campos obrigatórios.");
+            return;
+        }
+
+        var formData = new FormData(this);
+        var object = {};
+        formData.forEach((value, key) => object[key] = value);
+        object.tipo = document.getElementById("selection").value;
+        var json = JSON.stringify(object);
+
+        if (json.length > 2) {
+            console.log(json)
+            fetch("http://localhost:3000/api/form", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: json
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Sucesso:", data);
+            })
+            .catch(error => {
+                console.error("Erro:", error);
+            });
         }
     });
-
-    if (!allFilled) {
-        alert("Por favor, preencha todos os campos obrigatórios.");
-        return;
-    }
-
-    var formData = new FormData(this);
-    var object = {};
-    formData.forEach((value, key) => object[key] = value);
-    object.tipo = document.getElementById("selection").value;
-    var json = JSON.stringify(object);
-
-    if (json.length > 2) {
-        console.log(json)
-        fetch("http://localhost:3000/api/form", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: json
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log("Sucesso:", data);
-        })
-        .catch(error => {
-            console.error("Erro:", error);
-        });
-    }
-});
 
 
 ///////////////////////

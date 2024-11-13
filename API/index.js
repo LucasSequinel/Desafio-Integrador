@@ -15,6 +15,8 @@ app.use(cors());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(express.json());
+
 app.get('/api/alunos', alunoController.listarAlunos);
 app.get('/api/cursos', cursoController.listarCursos);
 app.get('/api/atividades', atividadesController.listarAtividades);
