@@ -6,6 +6,8 @@ exports.removerItem = (req, res) => {
     const sql = `DELETE FROM ${itemTipo} WHERE id= ?`;
     let sucesso;
 
+    console.log(itemID, itemTipo)
+
     db.run(sql, [itemID], function(err) {
         if (err) {
             console.error('Erro ao remover item:', err.message);
@@ -15,11 +17,4 @@ exports.removerItem = (req, res) => {
             sucesso = true
         }
     });
-    
-
-    if (sucesso) {
-        res.status(200).json({ mensagem: 'Item removido com sucesso!' });
-    } else {
-        res.status(500).json({ mensagem: 'Erro ao remover item.' });
-    }
 };
